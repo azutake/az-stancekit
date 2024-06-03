@@ -1,4 +1,5 @@
 local stancedVehicles = {}
+local waitForInitialLoad = true
 
 local function ceil(num, decimal_places)
   local multiplier = 10^(decimal_places or 0)
@@ -145,15 +146,21 @@ end)
 
 AddStateBagChangeHandler('vehicle_stance', nil, function(bagName, key, value)
   local entity = GetEntityFromStateBagName(bagName)
-  if not DoesEntityExist(entity) then return end
+  while not HasCollisionLoadedAroundEntity(entity) do
+    if not DoesEntityExist(entity) and not waitForInitialLoad then return end
+    Wait(250)
+  end
+  -- print("changed", entity)
+
   stancedVehicles[entity] = value
 end)
 
 CreateThread(function()
   while true do
     for veh, val in pairs(stancedVehicles) do
-      if not DoesEntityExist(veh) then
+      if not DoesEntityExist(veh) and not waitForInitialLoad then
         stancedVehicles[veh] = nil
+        -- print("removed", veh)
       else
         if val.height then SetVehicleSuspensionHeight(veh, val.height) end
         if val.offsetFront then
@@ -185,6 +192,11 @@ end)
 
 RegisterNetEvent("az:stancekit:showHelp", function (helpText)
   DisplayHelpText(helpText, false, 7000)
+end)
+
+RegisterNetEvent("az:stancekit:playerReady", function ()
+  Wait(1000)
+  waitForInitialLoad = false
 end)
 
 AddEventHandler('gameEventTriggered', function (name, args)

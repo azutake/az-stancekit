@@ -2,6 +2,10 @@ local QBCore = exports['qb-core']:GetCoreObject()
 local stancedVehicles = {}
 local lastChecked = {}
 
+RegisterNetEvent('QBCore:Server:PlayerLoaded', function(xPlayer)
+  TriggerClientEvent("az:stancekit:playerReady", xPlayer.PlayerData.source)
+end)
+
 QBCore.Functions.CreateUseableItem("stancerkit", function(source, item)
   local src = source
   local veh = GetVehiclePedIsIn(GetPlayerPed(src), false)
