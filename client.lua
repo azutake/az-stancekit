@@ -83,8 +83,6 @@ RegisterCommand("stance", function()
   local rH, rOF, rOR, rCF, rCR, rWS, rWW = getHandlings(fakeVeh)
   DeleteVehicle(fakeVeh)
   local cH, cOF, cOR, cCF, cCR, cWS, cWW = getHandlings(vehicle)
-  print(rCF, cCF)
-  print(json.encode(state.vehicle_stance))
   SendNUIMessage({
     type = "localization",
     locale = NuiLocales
@@ -124,7 +122,6 @@ RegisterNUICallback("ok", function(data, cb)
 end)
 
 RegisterNUICallback("setVal", function(data, cb)
-  print(json.encode(data))
   local state = Entity(getCurrentVeh()).state
   local stance = state.vehicle_stance
   if not stance then cb(true) return end
@@ -138,7 +135,6 @@ RegisterNUICallback("setVal", function(data, cb)
 end)
 
 RegisterNUICallback("setToggle", function(data, cb)
-  print(json.encode(data))
   local state = Entity(getCurrentVeh()).state
   local stance = state.vehicle_stance
   if not stance then cb(true) return end
