@@ -1,0 +1,22 @@
+{
+  "natives": {
+    "STANCEKIT_HELP_ALREADY_INSTALLED": "This vehicle already has a stance kit installed",
+    "STANCEKIT_HELP_INSTALL_COMPLETED": "Stance kit has been installed on the vehicle. ~n~You can tune it using ~h~/stance~h~",
+    "STANCEKIT_HELP_INSTALL_NEED_IN_CAR": "You need to be in the vehicle to install the kit",
+    "STANCEKIT_HELP_OPEN_NEED_IN_CAR": "You need to be in the vehicle to perform stance tuning",
+    "STANCEKIT_HELP_NEED_KIT": "You need to install the kit to perform stance tuning"
+  },
+  "nui": {
+    "common.title": "STANCE TUNING",
+    "common.low": "Low",
+    "common.high": "High",
+    "common.reset": "Reset to default",
+    "tuning.height": "Ride Height",
+    "tuning.offsetFront": "Wheel Offset Front",
+    "tuning.offsetRear": "Wheel Offset Rear",
+    "tuning.camberFront": "Camber Front",
+    "tuning.camberRear": "Camber Rear",
+    "tuning.wheelSize": "Wheel Size",
+    "tuning.wheelWidth": "Wheel Width"
+  }
+}
