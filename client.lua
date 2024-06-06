@@ -190,7 +190,8 @@ CreateThread(function()
         end
         if val.wheelWidth then
           SetVehicleWheelWidth(veh, val.wheelWidth)
-          for i = 0,3 do SetVehicleWheelTireColliderWidth(veh, i, ceil(val.wheelWidth, 2)) end
+          -- NOTE: Temporary remove for bugs
+          -- for i = 0,3 do SetVehicleWheelTireColliderWidth(veh, i, ceil(val.wheelWidth, 2)) end
         end
       end
     end
