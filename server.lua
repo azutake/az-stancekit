@@ -50,6 +50,9 @@ RegisterNetEvent('az:stance:removeStance', function(plate)
   end
   if remover ~= 0 then
     TriggerClientEvent("az:stancekit:showHelp", remover, "STANCEKIT_HELP_UNINSTALLED")
+    local Player = QBCore.Functions.GetPlayer(src)
+    if not Player then return end
+    if not Player.Functions.AddItem("stancerkit", 1) then return end
   end
 end)
 
