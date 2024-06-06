@@ -4,7 +4,9 @@
     "STANCEKIT_HELP_INSTALL_COMPLETED": "Stance kit has been installed on the vehicle. ~n~You can tune it using ~h~/stance~h~",
     "STANCEKIT_HELP_INSTALL_NEED_IN_CAR": "You need to be in the vehicle to install the kit",
     "STANCEKIT_HELP_OPEN_NEED_IN_CAR": "You need to be in the vehicle to perform stance tuning",
-    "STANCEKIT_HELP_NEED_KIT": "You need to install the kit to perform stance tuning"
+    "STANCEKIT_HELP_NEED_KIT": "You need to install the kit to perform stance tuning",
+    "STANCEKIT_HELP_UNINSTALLED_LAST": "The stance kit was removed from the last occupied vehicle.",
+    "STANCEKIT_HELP_UNINSTALLED": "Stance kit removed."
   },
   "nui": {
     "common.title": "STANCE TUNING",

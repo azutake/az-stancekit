@@ -32,6 +32,8 @@ end
 
 local function getWheelSizeOrNil(vehicle)
   local original = GetVehicleWheelSize(vehicle)
+
+  if GetVehicleMod(vehicle, 23) == -1 then return nil end
   if not SetVehicleWheelSize(vehicle, original+0.1) then return nil end
   SetVehicleWheelSize(vehicle, original)
   return original
@@ -39,6 +41,7 @@ end
 
 local function getWheelWidthOrNil(vehicle)
   local original = GetVehicleWheelWidth(vehicle)
+  if GetVehicleMod(vehicle, 23) == -1 then return nil end
   if not SetVehicleWheelWidth(vehicle, original+0.1) then return nil end
   SetVehicleWheelWidth(vehicle, original)
   return original
@@ -64,7 +67,7 @@ local function createFakeVeh(ref)
   SetVehicleModKit(veh, 0)
   SetVehicleWheelType(veh, GetVehicleWheelType(ref))
   SetVehicleMod(veh, 23, GetVehicleMod(ref, 23), GetVehicleModVariation(ref, 23))
-  SetVehicleMod(veh, 24, GetVehicleMod(ref, 24), GetVehicleModVariation(ref, 23))
+  SetVehicleMod(veh, 24, GetVehicleMod(ref, 24), GetVehicleModVariation(ref, 24))
   Wait(1)
   return veh
 end
@@ -150,7 +153,13 @@ AddStateBagChangeHandler('vehicle_stance', nil, function(bagName, key, value)
     if not DoesEntityExist(entity) and not waitForInitialLoad then return end
     Wait(250)
   end
-  -- print("changed", entity)
+
+  if not value then
+    local lastVeh = GetVehiclePedIsIn(PlayerPedId(), true)
+    if lastVeh ~= 0 then
+      DisplayHelpText("STANCEKIT_HELP_UNINSTALLED_LAST", false, 7000)
+    end
+  end
 
   stancedVehicles[entity] = value
 end)
@@ -160,7 +169,6 @@ CreateThread(function()
     for veh, val in pairs(stancedVehicles) do
       if not DoesEntityExist(veh) and not waitForInitialLoad then
         stancedVehicles[veh] = nil
-        -- print("removed", veh)
       else
         if val.height then SetVehicleSuspensionHeight(veh, val.height) end
         if val.offsetFront then

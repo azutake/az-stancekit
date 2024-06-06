@@ -4,6 +4,7 @@ games { 'gta5' }
 author "azutake"
 
 ui_page "html/index.html"
+-- ui_page "https://devfront-stance.vrcgta.jp"
 
 files {
 	"html/*",

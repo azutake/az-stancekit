@@ -4,7 +4,9 @@
     "STANCEKIT_HELP_INSTALL_COMPLETED": "車両にスタンスキットを装着した。~n~チューニングするには~h~/stance~h~で行える",
     "STANCEKIT_HELP_INSTALL_NEED_IN_CAR": "装着するには乗車する必要がある",
     "STANCEKIT_HELP_OPEN_NEED_IN_CAR": "スタンスチューニングをするには乗車する必要がある",
-    "STANCEKIT_HELP_NEED_KIT": "スタンスチューニングをするにはキットの装着が必要だ"
+    "STANCEKIT_HELP_NEED_KIT": "スタンスチューニングをするにはキットの装着が必要だ",
+    "STANCEKIT_HELP_UNINSTALLED_LAST": "最後に乗車していた車両からスタンスキットが取り外された",
+    "STANCEKIT_HELP_UNINSTALLED": "スタンスキットを取り外した"
   },
   "nui": {
     "common.title": "スタンスチューニング",

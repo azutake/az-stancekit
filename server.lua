@@ -39,6 +39,20 @@ RegisterNetEvent('az:stance:enteredVehicle', function(netId, plate)
   end
 end)
 
+RegisterNetEvent('az:stance:removeStance', function(plate)
+  local remover = source
+  MySQL.query.await('UPDATE player_vehicles SET has_stance = 0, stance_mods = "{}" WHERE plate = ? LIMIT 1', { plate })
+  for k, v in pairs(stancedVehicles) do
+    if v.plate == plate then
+      print("removing...")
+      Entity(k).state:set("vehicle_stance", nil, true)
+    end
+  end
+  if remover ~= 0 then
+    TriggerClientEvent("az:stancekit:showHelp", remover, "STANCEKIT_HELP_UNINSTALLED")
+  end
+end)
+
 local function saveVehicleStance(plate, data)
   MySQL.query.await('UPDATE player_vehicles SET has_stance = 1, stance_mods = ? WHERE plate = ?', { json.encode(data), plate })
   print("saved")
@@ -49,6 +63,10 @@ AddStateBagChangeHandler('vehicle_stance' , nil , function(bagName, key, value)
   if not DoesEntityExist(entity) then return end
   if not stancedVehicles[entity] then
     stancedVehicles[entity] = {}
+  end
+  if not value then
+    stancedVehicles[entity] = nil
+    return
   end
   stancedVehicles[entity].data = value
   stancedVehicles[entity].saved = false
@@ -68,13 +86,13 @@ CreateThread(function()
   end
 end)
 
---FIXME: remove
-CreateThread(function()
-  while true do
-    print(json.encode(stancedVehicles))
-    Wait(10 * 1000)
-  end
-end)
+-- --FIXME: remove
+-- CreateThread(function()
+--   while true do
+--     print(json.encode(stancedVehicles))
+--     Wait(10 * 1000)
+--   end
+-- end)
 
 -- 定期保存処理
 CreateThread(function()
